@@ -38,7 +38,7 @@ td input{padding:5px 6px;min-width:64px}.r{text-align:right}.num{font-variant-nu
 #sug li{padding:8px 10px;cursor:pointer;border-bottom:1px solid var(--ln)}#sug li:hover{background:var(--bg)}
 .pr{display:none}
 @page{size:A4 portrait;margin:10mm}
-.paper{background:#fff;color:#000;border:1px solid var(--ln);padding:26px;font:13px/1.4 Calibri,Barlow,Arial,sans-serif;width:190mm;max-width:none;margin:0 auto 16px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.paper{display:flex;flex-direction:column;min-height:276mm;background:#fff;color:#000;border:1px solid var(--ln);padding:26px;font:13px/1.4 Calibri,Barlow,Arial,sans-serif;width:190mm;max-width:none;margin:0 auto 16px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .paper p{margin:8px 0}table.qt{border-collapse:collapse;width:100%;font-size:12px}.qt th,.qt td{border:1px solid #000;padding:5px;text-align:center}.qt td.l{text-align:left}.qt tr.sm td{font-weight:700}.qt img{display:block;margin:0 auto}
 @media print{.pwrap{overflow:visible}header,nav,.np{display:none!important}body{background:#fff}main{padding:0;max-width:none}.paper{border:0;padding:0;margin:0;width:190mm;max-width:none}}
 .pwrap{overflow-x:auto}nav{overflow-x:auto;max-width:100%}nav button{white-space:nowrap}
@@ -54,7 +54,7 @@ td input{padding:5px 6px;min-width:64px}.r{text-align:right}.num{font-variant-nu
 <main id="app"></main>
 <script>
 // PASTE YOUR FIREBASE SETTINGS HERE (Firebase console > Project settings > Your apps > Web app)
-const FB={apiKey:'AIzaSyD_uLVrOn1xFMlYZZNqa594rg_DaQgAZDQ',authDomain:'quotedesk-1d21a.firebaseapp.com',projectId:'quotedesk-1d21a',appId:'1:257723780744:web:f4618985d23008f32bd93d'};
+const FB={apiKey:'PASTE_API_KEY',authDomain:'PASTE_AUTH_DOMAIN',projectId:'PASTE_PROJECT_ID',appId:'PASTE_APP_ID'};
 const SEED=[
 ["Cordless","21-12CD-2","12V Combi Drill, 2 × 2.0Ah battery, 4.0A charger, kit box",2,277,205],
 ["Cordless","21-18BLCD-2-BMC","18V Brushless Combi Drill, 2 × 2.0Ah battery, 4.0A charger, kit box",3,588,435],
@@ -175,7 +175,7 @@ ${row('SUB TOTAL',fm(t.sub))}${Q.disc?row('DISCOUNT '+Q.disc+'%','−'+fm(t.d)):
 <p><b>${words(t.tot)}</b></p><p><b><i><u>Notes:</u></i></b></p><div style="margin-left:24px">Availability: ${esc(Q.avail)}<br>Price Validity: ${esc(Q.pval)}<br>Payment Terms : ${esc(Q.pay)}${Q.notes?'<br>'+esc(Q.notes).replace(/\n/g,'<br>'):''}</div>
 <p style="margin-top:14px">Thanks &amp; Regards,</p><div style="display:flex;gap:18px;align-items:center;margin-left:24px"><div>${esc((S.sales.find(p=>p.name==Q.sales)||{}).name||'')}<br>${esc((S.sales.find(p=>p.name==Q.sales)||{}).phone||'')}</div>${c.stamp?`<img src="${c.stamp}" alt="" style="height:80px">`:''}</div>
 <p style="font-style:italic;font-size:11px">This is a computer-generated document and does not require a signature.</p>
-<div style="text-align:center;font:700 12px Arial,sans-serif;margin:10px 0 4px">${esc(c.services).split(',').map(x=>x.trim().toUpperCase()).join(' &nbsp;·&nbsp; ')}</div><div style="background:#1d4f8f;color:#fff;text-align:center;font:700 12px Arial,sans-serif;padding:7px">${esc(c.office)}</div>`}
+<div style="margin-top:auto;padding-top:14px"><div style="text-align:center;font:700 12px Arial,sans-serif;margin:0 0 4px">${esc(c.services).split(',').map(x=>x.trim().toUpperCase()).join(' &nbsp;·&nbsp; ')}</div><div style="background:#1d4f8f;color:#fff;text-align:center;font:700 12px Arial,sans-serif;padding:7px">${esc(c.office)}</div></div>`}
 function sug(v){const l=$('#sl');v=v.toLowerCase().trim();if(!v){l.hidden=true;return}
 const r=S.stock.filter(s=>(s.code+' '+s.desc).toLowerCase().includes(v)).slice(0,8);
 l.innerHTML=r.map(s=>`<li data-c="${esc(s.code)}"><b>${esc(s.code)}</b> ${esc(s.desc)}<br><span class="mu">AED ${fm(s.price)} · ${s.stock} in stock</span></li>`).join('')||'<li class="mu">No match</li>';l.hidden=false;
